@@ -1,24 +1,16 @@
 import requests
-import pandas as pd
 
-url = "https://api.coingecko.com/api/v3/coins/markets"
+def extract_data():
 
-params = {
-    "vs_currency": "usd",
-    "order": "market_cap_desc",
-    "per_page": 10,
-    "page": 1
-}
+    url = "https://api.coingecko.com/api/v3/coins/markets"
 
-response = requests.get(url, params=params)
+    params = {
+        "vs_currency": "usd",
+        "order": "market_cap_desc",
+        "per_page": 10,
+        "page": 1
+    }
 
-data = response.json()
+    response = requests.get(url, params=params)
 
-df = pd.DataFrame(data)
-
-print(df.head())
-
-
-df.to_csv("../data/crypto_prices.csv", index=False)
-
-print("Data saved successfully")
+    return response.json()
